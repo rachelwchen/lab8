@@ -12,3 +12,4 @@ function initializePage() {
   initCamera();
 }
 
+

@@ -1,9 +1,14 @@
 function initCamera() {
   //Uncomment and fill in the correct selectors below.
-  capture($('video#camera-video'),
-          $('canvas#camera-canvas'),
-          $('button#camera-button'));
+  capture($('#camera-video'),
+          $('#camera-canvas'),
+          $('#camera-button'));
 }
+
+
+var image;
+var can;
+var dataURL;
 
 function capture(video, canvas, snapshotButton) {
   //Adopted from https://dev.opera.com/articles/media-capture-in-mobile-browsers/
@@ -24,6 +29,15 @@ function capture(video, canvas, snapshotButton) {
         canvas.attr('width', width);
         canvas.attr('height', height);
         ctx.drawImage(video[0], 0, 0, width, height);
+
+        image = new Image();
+        image.src = canvas[0].toDataURL('image/png');
+
+        console.log("Capture success");
+        console.log(image.src);
+        $("#changePic").show(); 
+        $("#yesPic").click(updateProfilePic);
+        $("#noPic").click(noUpdate);
     });
   };
 
@@ -38,4 +52,20 @@ function capture(video, canvas, snapshotButton) {
       successCallback, errorCallback);
 
 };
+
+function updateProfilePic(e) {
+  console.log("updating porfile pic");
+  // var image = new Image();
+  $('#photo').attr('src', image.src);
+  $("#changePic").hide();
+  $("#updated").show();
+  console.log(image.src);
+}
+
+function noUpdate(e) {
+  console.log("not updating. hide message");
+  $("#changePic").hide();
+}
+
+
 
