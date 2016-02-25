@@ -58,7 +58,10 @@ function updateProfilePic(e) {
   // var image = new Image();
   $('#photo').attr('src', image.src);
   $("#changePic").hide();
-  $("#updated").show();
+  //$("#updated").show();
+  //setTimeout(function() { $("#updated").hide(); }, 3000);
+  $("#updated").show().delay(5000).fadeOut();
+
   console.log(image.src);
 }
 
